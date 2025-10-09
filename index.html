@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAK FORMATION - Créez et Développez Votre Entreprise</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #000000;
+            --secondary: #F59E0B;
+            --accent: #10B981;
+            --dark: #1F2937;
+            --dark-gray: #374151;
+            --light: #F3F4F6;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #1F2937 100%);
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 0.5rem 0;
+            background: linear-gradient(135deg, #000000 0%, #111827 100%);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-svg {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .burger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #000000 0%, #1F2937 50%, #111827 100%);
+            color: var(--white);
+            padding: 150px 2rem 100px;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(245,158,11,0.05)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0) rotate(0deg); }
+            to { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: slideInLeft 1s ease-out 0.2s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: slideInLeft 1s ease-out 0.4s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background: #FBBF24;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: #000000;
+            transform: translateY(-3px);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            animation: slideInLeft 1s ease-out 0.6s backwards;
+        }
+
+        .badge-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .certification-badge {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideInRight 1s ease-out;
+            border: 2px solid #E5E7EB;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .qualiopi-logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .certification-badge h3 {
+            color: #000000;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .certification-badge p {
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #000000;
+            position: relative;
+            padding-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #6B7280;
+            margin-bottom: 3rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            border-color: var(--secondary);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary), #FBBF24);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+
+        .card p {
+            color: #4B5563;
+            line-height: 1.8;
+        }
+
+        .formation-detail {
+            background: linear-gradient(135deg, #F9FAFB 0%, #E5E7EB 100%);
+            padding: 80px 2rem;
+        }
+
+        .formation-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .competences-list {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .competences-list h3 {
+            color: #000000;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .competence-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #F9FAFB;
+            border-left: 4px solid var(--secondary);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .competence-item:hover {
+            background: #FEF3C7;
+            transform: translateX(5px);
+        }
+
+        .competence-item strong {
+            color: #000000;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-box {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .info-box h3 {
+            color: #000000;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #F9FAFB;
+            border-radius: 10px;
+        }
+
+        .info-icon {
+            min-width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #000000, #374151);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        .certification-notice {
+            background: linear-gradient(135deg, var(--accent), #34D399);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 3rem 0;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .certification-notice h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .certification-notice a {
+            color: var(--white);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .stats {
+            background: linear-gradient(135deg, #000000 0%, #1F2937 100%);
+            color: var(--white);
+            padding: 60px 2rem;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .stat-item p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+            padding: 80px 2rem;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .footer {
+            background: #000000;
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #D1D5DB;
+            text-decoration: none;
+            line-height: 2;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #1F2937;
+            color: #9CA3AF;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: modalSlide 0.3s ease-out;
+        }
+
+        @keyframes modalSlide {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #6B7280;
+        }
+
+            @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: #000000;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .formation-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <svg class="logo-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cercle extérieur -->
+                    <circle cx="60" cy="60" r="55" fill="none" stroke="white" stroke-width="2"/>
+                    
+                    <!-- Demi-lune droite -->
+                    <path d="M 90 30 Q 105 60 90 90" fill="none" stroke="white" stroke-width="2"/>
+                    
+                    <!-- Texte "Jak" en style manuscrit -->
+                    <text x="30" y="50" font-family="'Brush Script MT', cursive" font-size="24" fill="white" font-style="italic">Jak</text>
+                    
+                    <!-- Texte "COMPANY" -->
+                    <text x="30" y="75" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold" letter-spacing="2">COMPANY</text>
+                </svg>
+                <span class="logo-text">FORMATION</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#formation">Formation</a></li>
+                <li><a href="#avantages">Avantages</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <div class="badge-icon">✓</div>
+                    <span>Certification Qualiopi</span>
+                </div>
+                <h1>Créez et Développez Votre Entreprise avec Confiance</h1>
+                <p>Formation certifiante pour maîtriser tous les aspects de la création d'entreprise. Éligible CPF.</p>
+                <div class="cta-buttons">
+                    <a href="#formation" class="btn btn-primary">Découvrir la Formation</a>
+                    <a href="#contact" class="btn btn-secondary">Nous Contacter</a>
+                </div>
+            </div>
+            <div class="certification-badge">
+                <svg class="qualiopi-logo" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="180" height="60" rx="10" fill="#000000"/>
+                    <text x="100" y="40" text-anchor="middle" fill="white" font-size="24" font-weight="bold">QUALIOPI</text>
+                    <text x="100" y="58" text-anchor="middle" fill="#F59E0B" font-size="12">Certification Qualité</text>
+                </svg>
+                <h3>Organisme Certifié</h3>
+                <p>La marque de qualité des organismes de formation</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Pourquoi Choisir JAK Formation ?</h2>
+        <p class="section-subtitle">Des formations de qualité pour votre réussite professionnelle</p>
+        
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Contenu de Qualité</h3>
+                <p>Chaque cours est conçu par des experts. Nos instructeurs apportent leur expérience pratique et leur expertise théorique pour une formation de qualité.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⏰</div>
+                <h3>Flexibilité d'Apprentissage</h3>
+                <p>Nos cours en ligne s'adaptent à vos disponibilités. Que vous soyez étudiant, professionnel, ou avec des obligations familiales, apprenez à votre rythme.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💼</div>
+                <h3>Formation Certifiante</h3>
+                <p>Notre formation prépare à la certification RS7004 "Conduire un projet de création d'entreprise", reconnue par France Compétences.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="formation-detail" id="formation">
+        <h2 class="section-title">Formation : Gestion Stratégique d'un Projet de Création d'Entreprise</h2>
+        <p class="section-subtitle">Une formation complète pour concrétiser votre projet entrepreneurial</p>
+
+        <div class="certification-notice">
+            <h3>🎓 Formation Certifiante RS7004</h3>
+            <p style="margin-bottom: 1rem;">Cette formation prépare à la certification <strong>"Conduire un projet de création d'entreprise"</strong>, enregistrée le 31/01/2025 au Répertoire Spécifique de France Compétences sous le n° RS7004, et détenue par CréActifs.</p>
+            <p>Cette formation est proposée par JAK Formation, organisme habilité par le certificateur CRÉACTIFS à préparer et organiser l'évaluation RS7004.</p>
+            <p style="margin-top: 1rem;"><a href="https://www.francecompetences.fr/recherche/rs/7004/" target="_blank">➜ Consulter la fiche officielle France Compétences</a></p>
+        </div>
+
+        <div class="formation-content">
+            <div>
+                <div class="competences-list">
+                    <h3>📋 Compétences Visées</h3>
+                    <div class="competence-item">
+                        <strong>1. Vérification de la cohérence du projet</strong>
+                        <p>Évaluer l'adéquation entre les compétences, ambitions et contraintes personnelles avec les objectifs du projet pour valider sa faisabilité.</p>
+                    </div>
+                    <div class="competence-item">
+                        <strong>2. Analyse du marché</strong>
+                        <p>Réaliser des études quantitatives et qualitatives pour comprendre les besoins, attentes et comportements des clients cibles.</p>
+                    </div>
+                    <div class="competence-item">
+                        <strong>3. Construction du Business Model</strong>
+                        <p>Définir et structurer les composantes clés du projet pour en faire un outil de pilotage adapté.</p>
+                    </div>
+                    <div class="competence-item">
+                        <strong>4. Choix de la forme juridique</strong>
+                        <p>Identifier le statut juridique optimal en tenant compte des formalités et obligations.</p>
+                    </div>
+                    <div class="competence-item">
+                        <strong>5. Analyse de la rentabilité financière</strong>
+                        <p>Évaluer le chiffre d'affaires prévisionnel et les besoins financiers pour assurer la viabilité économique.</p>
+                    </div>
+                    <div class="competence-item">
+                        <strong>6. Stratégie de communication</strong>
+                        <p>Choisir les supports et réseaux adaptés et développer une ligne éditoriale cohérente.</p>
+                    </div>
+                    <div class="competence-item">
+                        <strong>7. Identification des aides disponibles</strong>
+                        <p>Repérer les dispositifs financiers accessibles et préparer les démarches.</p>
+                    </div>
+                    <div class="competence-item">
+                        <strong>8. Rédaction d'un argumentaire</strong>
+                        <p>Préparer une présentation convaincante adaptée aux interlocuteurs.</p>
+                    </div>
+                    <div class="competence-item">
+                        <strong>9. Formalités d'immatriculation</strong>
+                        <p>Réaliser les démarches légales nécessaires en conformité avec les réglementations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="info-box">
+                    <h3>ℹ️ Informations Pratiques</h3>
+                    <div class="info-item">
+                        <div class="info-icon">💰</div>
+                        <div>
+                            <strong>Coût de la formation</strong>
+                            <p>2 300 € - Éligible au CPF</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">⏱️</div>
+                        <div>
+                            <strong>Durée</strong>
+                            <p>35 heures, soit 5 jours</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🎓</div>
+                        <div>
+                            <strong>Modalités pédagogiques</strong>
+                            <p>Formation alternant séquence synchrone à distance et asynchrone à distance</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">👥</div>
+                        <div>
+                            <strong>Public visé</strong>
+                            <p>Tout public ayant un projet de création d'une entreprise ou ayant déjà créé son entreprise depuis moins de 2 ans</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📝</div>
+                        <div>
+                            <strong>Prérequis</strong>
+                            <p>Bonne connaissance des outils bureautiques. Aisance dans le rédactionnel et le traitement de données chiffrées.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📅</div>
+                        <div>
+                            <strong>Délais d'accès</strong>
+                            <p>Prévoir au moins un mois avant de pouvoir accéder à la formation</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">♿</div>
+                        <div>
+                            <strong>Accessibilité handicap</strong>
+                            <p>Pour toute situation de handicap, contactez-nous à formationjak@gmail.com pour répondre aux besoins spécifiques.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h3>🎯 Modalités d'Évaluation</h3>
+                    <div class="info-item">
+                        <div class="info-icon">1</div>
+                        <div>
+                            <p>Questionnaire de positionnement et entretien initial pour adapter le parcours</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">2</div>
+                        <div>
+                            <p>Exercices pratiques, mises en situation et tests réguliers avec feedbacks personnalisés</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">3</div>
+                        <div>
+                            <p>Mise en situation professionnelle avec remise d'un rapport écrit et soutenance orale</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">✓</div>
+                        <div>
+                            <p>Évaluation finale organisée conformément aux modalités prévues par CRÉACTIFS et validées par France Compétences</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>2100+</h3>
+                <p>Formations dispensées en 2024</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>En ligne et flexible</p>
+            </div>
+            <div class="stat-item">
+                <h3>CPF</h3>
+                <p>Éligible au financement</p>
+            </div>
+            <div class="stat-item">
+                <h3>35h</h3>
+                <p>De formation certifiante</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="avantages">
+        <h2 class="section-title">Objectifs Pédagogiques</h2>
+        <p class="section-subtitle">Cette formation accompagne les entrepreneurs dans la concrétisation de leur projet</p>
+        
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Structuration de l'Idée</h3>
+                <p>Définir clairement votre offre et valider la faisabilité de votre projet entrepreneurial.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚖️</div>
+                <h3>Choix du Modèle Juridique</h3>
+                <p>Identifier le statut juridique le plus adapté à votre situation et à vos ambitions.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💡</div>
+                <h3>Business Plan Solide</h3>
+                <p>Rédiger un Business Plan complet et convaincant pour vos partenaires et investisseurs.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>Démarches Administratives</h3>
+                <p>Accomplir toutes les formalités d'immatriculation en toute sérénité.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎓</div>
+                <h3>Approche Méthodique</h3>
+                <p>Une méthodologie éprouvée garantissant que chaque étape soit finalisée avant de passer à la suivante.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🤝</div>
+                <h3>Accompagnement Personnalisé</h3>
+                <p>Un suivi individualisé tout au long de votre parcours de formation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="section">
+            <h2 class="section-title">Contactez-Nous</h2>
+            <p class="section-subtitle">Prêt à lancer votre projet ? Parlons-en ensemble !</p>
+            
+            <div class="contact-container">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nom et Prénom *</label>
+                        <input type="text" id="name" name="name" required placeholder="Votre nom complet">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="votre.email@exemple.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Décrivez-nous votre projet ou posez-nous vos questions..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <svg style="height: 60px; width: auto; margin-bottom: 1rem;" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="60" r="55" fill="none" stroke="#F59E0B" stroke-width="2"/>
+                    <path d="M 90 30 Q 105 60 90 90" fill="none" stroke="#F59E0B" stroke-width="2"/>
+                    <text x="30" y="50" font-family="'Brush Script MT', cursive" font-size="24" fill="#F59E0B" font-style="italic">Jak</text>
+                    <text x="30" y="75" font-family="Arial, sans-serif" font-size="16" fill="#F59E0B" font-weight="bold" letter-spacing="2">COMPANY</text>
+                </svg>
+                <h3>JAK FORMATION</h3>
+                <p><strong>Organisme de formation</strong></p>
+                <p>37 A Rue Balland</p>
+                <p>69120 Vaulx-En-Velin</p>
+                <p>SIRET : 98527374700016</p>
+                <p>Email : formationjak@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Informations Légales</h3>
+                <p><strong>Numéro de déclaration d'activité :</strong></p>
+                <p>Organisme de formation déclaré</p>
+                <p><strong>Certification Qualiopi :</strong></p>
+                <p>La marque de garantie de la qualité des actions de formation</p>
+                <p><strong>Organisme exonéré de TVA</strong></p>
+            </div>
+            <div class="footer-section">
+                <h3>Certification</h3>
+                <p>JAK Formation est habilité par CréActifs à préparer et organiser l'évaluation pour la certification RS7004.</p>
+                <p style="margin-top: 1rem;"><strong>Partenaire certificateur :</strong></p>
+                <p>CréActifs</p>
+                <p style="margin-top: 1rem;">
+                    <a href="https://www.francecompetences.fr/recherche/rs/7004/" target="_blank">
+                        📄 Fiche certification RS7004
+                    </a>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <p><a href="#accueil">Accueil</a></p>
+                <p><a href="#formation">Notre Formation</a></p>
+                <p><a href="#avantages">Avantages</a></p>
+                <p><a href="#contact">Contact</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 JAK Formation. Tous droits réservés.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                Cette formation prépare à la certification "Conduire un projet de création d'entreprise", 
+                enregistrée au Répertoire Spécifique sous le n° RS7004.
+            </p>
+        </div>
+    </footer>
+
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 style="color: var(--accent); margin-bottom: 1rem;">✓ Message envoyé !</h2>
+            <p>Merci pour votre message. Notre équipe vous répondra dans les plus brefs délais.</p>
+            <button onclick="closeModal()" class="btn btn-primary" style="margin-top: 1.5rem;">Fermer</button>
+        </div>
+    </div>
+
+    <script>
+        // Gestion du menu burger
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('navMenu');
+        
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Fermer le menu au clic sur un lien
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Header qui change au scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Appliquer l'animation aux cartes
+        document.querySelectorAll('.card, .competence-item, .info-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Gestion du formulaire de contact
+        const contactForm = document.getElementById('contactForm');
+        const successModal = document.getElementById('successModal');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simuler l'envoi du formulaire
+            // Dans un vrai site, vous enverriez les données à un serveur
+            console.log('Formulaire soumis:', {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                message: document.getElementById('message').value
+            });
+
+            // Afficher le modal de succès
+            successModal.style.display = 'flex';
+            
+            // Réinitialiser le formulaire
+            contactForm.reset();
+        });
+
+        function closeModal() {
+            successModal.style.display = 'none';
+        }
+
+        // Fermer le modal en cliquant en dehors
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                closeModal();
+            }
+        });
+
+        // Smooth scroll pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = 70;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation des chiffres dans les statistiques
+        const animateStats = () => {
+            const stats = document.querySelectorAll('.stat-item h3');
+            stats.forEach(stat => {
+                const text = stat.textContent;
+                const number = parseInt(text.replace(/\D/g, ''));
+                
+                if (number) {
+                    let current = 0;
+                    const increment = number / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= number) {
+                            stat.textContent = text;
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current) + text.replace(/\d/g, '');
+                        }
+                    }, 30);
+                }
+            });
+        };
+
+        // Observer pour les stats
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
+                        
