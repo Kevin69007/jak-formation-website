@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - JAK FORMATION</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #000000;
+            --secondary: #F59E0B;
+            --accent: #10B981;
+            --dark: #1F2937;
+            --dark-gray: #374151;
+            --light: #F3F4F6;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #1F2937 100%);
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 0.5rem 0;
+            background: linear-gradient(135deg, #000000 0%, #111827 100%);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-svg {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a.active {
+            color: var(--secondary);
+        }
+
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .burger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #000000 0%, #1F2937 50%, #111827 100%);
+            color: var(--white);
+            padding: 120px 2rem 80px;
+            margin-top: 70px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+            padding: 80px 2rem;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .contact-info h2 {
+            color: var(--dark);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #F9FAFB;
+            border-radius: 15px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .info-icon {
+            min-width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--secondary), #FBBF24);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .info-content h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-content p {
+            color: #6B7280;
+            line-height: 1.6;
+        }
+
+        .info-content a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .info-content a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .contact-form h2 {
+            color: var(--dark);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--dark);
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: #FBBF24;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .footer {
+            background: #000000;
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #D1D5DB;
+            text-decoration: none;
+            line-height: 2;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #1F2937;
+            color: #9CA3AF;
+        }
+
+        /* Flèche de retour en haut */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .scroll-to-top:hover {
+            background: #FBBF24;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .scroll-to-top.visible {
+            display: flex;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: modalSlide 0.3s ease-out;
+        }
+
+        @keyframes modalSlide {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #6B7280;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: #000000;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+                    <svg class="logo-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cercle extérieur -->
+                        <circle cx="60" cy="60" r="55" fill="none" stroke="white" stroke-width="2"/>
+                        
+                        <!-- Demi-lune droite -->
+                        <path d="M 90 30 Q 105 60 90 90" fill="none" stroke="white" stroke-width="2"/>
+                        
+                        <!-- Texte "Jak" en style manuscrit -->
+                        <text x="30" y="50" font-family="'Brush Script MT', cursive" font-size="24" fill="white" font-style="italic">Jak</text>
+                        
+                        <!-- Texte "COMPANY" -->
+                        <text x="30" y="75" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold" letter-spacing="2">COMPANY</text>
+                    </svg>
+                    <span class="logo-text">FORMATION</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#formation">Formation</a></li>
+                <li><a href="index.html#avantages">Avantages</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Contactez-Nous</h1>
+        <p>Prêt à lancer votre projet ? Parlons-en ensemble ! Notre équipe est là pour vous accompagner dans votre parcours entrepreneurial.</p>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Nos Coordonnées</h2>
+                
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <h3>Adresse</h3>
+                        <p>37 A Rue Balland<br>69120 Vaulx-En-Velin</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">📧</div>
+                    <div class="info-content">
+                        <h3>Email</h3>
+                        <p><a href="mailto:formationjak@gmail.com">formationjak@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">🏢</div>
+                    <div class="info-content">
+                        <h3>SIRET</h3>
+                        <p>98527374700016</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">🎓</div>
+                    <div class="info-content">
+                        <h3>Certification</h3>
+                        <p>Organisme de formation certifié Qualiopi<br>Habilité par CréActifs pour la certification RS7004</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">♿</div>
+                    <div class="info-content">
+                        <h3>Accessibilité</h3>
+                        <p>Pour toute situation de handicap, contactez-nous pour répondre à vos besoins spécifiques.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h2>Envoyez-nous un Message</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nom et Prénom *</label>
+                        <input type="text" id="name" name="name" required placeholder="Votre nom complet">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="votre.email@exemple.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Sujet</label>
+                        <input type="text" id="subject" name="subject" placeholder="Sujet de votre message">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Décrivez-nous votre projet ou posez-nous vos questions..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <svg style="height: 60px; width: auto; margin-bottom: 1rem;" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="60" r="55" fill="none" stroke="#F59E0B" stroke-width="2"/>
+                    <path d="M 90 30 Q 105 60 90 90" fill="none" stroke="#F59E0B" stroke-width="2"/>
+                    <text x="30" y="50" font-family="'Brush Script MT', cursive" font-size="24" fill="#F59E0B" font-style="italic">Jak</text>
+                    <text x="30" y="75" font-family="Arial, sans-serif" font-size="16" fill="#F59E0B" font-weight="bold" letter-spacing="2">COMPANY</text>
+                </svg>
+                <h3>JAK FORMATION</h3>
+                <p><strong>Organisme de formation</strong></p>
+                <p>37 A Rue Balland</p>
+                <p>69120 Vaulx-En-Velin</p>
+                <p>SIRET : 98527374700016</p>
+                <p>Email : formationjak@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Informations Légales</h3>
+                <p><strong>Numéro de déclaration d'activité :</strong></p>
+                <p>Organisme de formation déclaré</p>
+                <p><strong>Certification Qualiopi :</strong></p>
+                <p>La marque de garantie de la qualité des actions de formation</p>
+                <p><strong>Organisme exonéré de TVA</strong></p>
+            </div>
+            <div class="footer-section">
+                <h3>Certification</h3>
+                <p>JAK Formation est habilité par CréActifs à préparer et organiser l'évaluation pour la certification RS7004.</p>
+                <p style="margin-top: 1rem;"><strong>Partenaire certificateur :</strong></p>
+                <p>CréActifs</p>
+                <p style="margin-top: 1rem;">
+                    <a href="https://www.francecompetences.fr/recherche/rs/7004/" target="_blank">
+                        📄 Fiche certification RS7004
+                    </a>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <p><a href="index.html">Accueil</a></p>
+                <p><a href="index.html#formation">Notre Formation</a></p>
+                <p><a href="index.html#avantages">Avantages</a></p>
+                <p><a href="contact.html">Contact</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 JAK Formation. Tous droits réservés.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                Cette formation prépare à la certification "Conduire un projet de création d'entreprise", 
+                enregistrée au Répertoire Spécifique sous le n° RS7004.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Flèche de retour en haut -->
+    <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()" title="Retour en haut">
+        ↑
+    </button>
+
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 style="color: var(--accent); margin-bottom: 1rem;">✓ Message envoyé !</h2>
+            <p>Merci pour votre message. Notre équipe vous répondra dans les plus brefs délais.</p>
+            <button onclick="closeModal()" class="btn btn-primary" style="margin-top: 1.5rem;">Fermer</button>
+        </div>
+    </div>
+
+    <script>
+        // Gestion du menu burger
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('navMenu');
+        
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Fermer le menu au clic sur un lien
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Header qui change au scroll
+        const header = document.getElementById('header');
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                header.classList.remove('scrolled');
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Fonction pour remonter en haut de page
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Gestion du formulaire de contact
+        const contactForm = document.getElementById('contactForm');
+        const successModal = document.getElementById('successModal');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simuler l'envoi du formulaire
+            // Dans un vrai site, vous enverriez les données à un serveur
+            console.log('Formulaire soumis:', {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            });
+
+            // Afficher le modal de succès
+            successModal.style.display = 'flex';
+            
+            // Réinitialiser le formulaire
+            contactForm.reset();
+        });
+
+        function closeModal() {
+            successModal.style.display = 'none';
+        }
+
+        // Fermer le modal en cliquant en dehors
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
