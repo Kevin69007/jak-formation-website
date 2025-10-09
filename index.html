@@ -569,6 +569,37 @@
             color: #9CA3AF;
         }
 
+        /* Flèche de retour en haut */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .scroll-to-top:hover {
+            background: #FBBF24;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .scroll-to-top.visible {
+            display: flex;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -676,7 +707,7 @@
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#formation">Formation</a></li>
                 <li><a href="#avantages">Avantages</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="burger" id="burger">
                 <span></span>
@@ -697,7 +728,7 @@
                 <p>Formation certifiante pour maîtriser tous les aspects de la création d'entreprise. Éligible CPF.</p>
                 <div class="cta-buttons">
                     <a href="#formation" class="btn btn-primary">Découvrir la Formation</a>
-                    <a href="#contact" class="btn btn-secondary">Nous Contacter</a>
+                    <a href="contact.html" class="btn btn-secondary">Nous Contacter</a>
                 </div>
             </div>
             <div class="certification-badge">
@@ -1002,7 +1033,7 @@
                 <p><a href="#accueil">Accueil</a></p>
                 <p><a href="#formation">Notre Formation</a></p>
                 <p><a href="#avantages">Avantages</a></p>
-                <p><a href="#contact">Contact</a></p>
+                <p><a href="contact.html">Contact</a></p>
             </div>
         </div>
         <div class="footer-bottom">
@@ -1013,6 +1044,11 @@
             </p>
         </div>
     </footer>
+
+    <!-- Flèche de retour en haut -->
+    <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()" title="Retour en haut">
+        ↑
+    </button>
 
     <div class="modal" id="successModal">
         <div class="modal-content">
@@ -1041,13 +1077,25 @@
 
         // Header qui change au scroll
         const header = document.getElementById('header');
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
                 header.classList.add('scrolled');
+                scrollToTopBtn.classList.add('visible');
             } else {
                 header.classList.remove('scrolled');
+                scrollToTopBtn.classList.remove('visible');
             }
         });
+
+        // Fonction pour remonter en haut de page
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
         // Animation au scroll
         const observerOptions = {
