@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JAK FORMATION - Créez et Développez Votre Entreprise</title>
+    <!-- reCAPTCHA v2 -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         * {
             margin: 0;
@@ -972,6 +974,9 @@
                         <label for="message">Message *</label>
                         <textarea id="message" name="message" rows="5" required placeholder="Décrivez-nous votre projet ou posez-nous vos questions..."></textarea>
                     </div>
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LddT-UrAAAAAMbqKxmXrLL9HmxS76uMe2M5z0t4"></div>
+                    </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer le message</button>
                 </form>
             </div>
@@ -1106,20 +1111,29 @@
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
+            // Vérifier le captcha
+            const captchaResponse = grecaptcha.getResponse();
+            if (captchaResponse.length === 0) {
+                alert('Veuillez cocher la case "Je ne suis pas un robot" pour continuer.');
+                return;
+            }
+            
             // Simuler l'envoi du formulaire
             // Dans un vrai site, vous enverriez les données à un serveur
             console.log('Formulaire soumis:', {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
-                message: document.getElementById('message').value
+                message: document.getElementById('message').value,
+                captcha: captchaResponse
             });
 
             // Afficher le modal de succès
             successModal.style.display = 'flex';
             
-            // Réinitialiser le formulaire
+            // Réinitialiser le formulaire et le captcha
             contactForm.reset();
+            grecaptcha.reset();
         });
 
         function closeModal() {
