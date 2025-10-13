@@ -975,8 +975,10 @@
                         <textarea id="message" name="message" rows="5" required placeholder="Décrivez-nous votre projet ou posez-nous vos questions..."></textarea>
                     </div>
                     <div class="form-group">
-                        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                       <!--  <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div> -->
+                        <input type="hidden" name="recaptcha_token" id="6LcQS-grAAAAAJjLxoA1O4blaDWeKVqRoMXjN2BB">
                     </div>
+                    
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer le message</button>
                 </form>
             </div>
@@ -1226,6 +1228,7 @@
             statsObserver.observe(statsSection);
         }
     </script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcQS-grAAAAAA2zZ0HsS5OvqzWoB0N-avFt10Eu"></script>
 </body>
 </html>
                         
