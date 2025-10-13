@@ -1274,7 +1274,7 @@
         }
     </script> -->
     <!-- Charge reCAPTCHA v3 -->
-<script src="https://www.google.com/recaptcha/api.js?render=VOTRE_CLÉ_SITE"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LcQS-grAAAAAA2zZ0HsS5OvqzWoB0N-avFt10Eu"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -1345,7 +1345,7 @@
             submitBtn.textContent = 'Envoi en cours...';
 
             grecaptcha.ready(() => {
-                grecaptcha.execute('VOTRE_CLÉ_SITE', { action: 'contact' }).then(async (token) => {
+                grecaptcha.execute('6LcQS-grAAAAAA2zZ0HsS5OvqzWoB0N-avFt10Eu', { action: 'contact' }).then(async (token) => {
                     try {
                         const response = await fetch('http://localhost:3000/api/contact', {
                             method: 'POST',
